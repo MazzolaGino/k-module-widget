@@ -22,8 +22,6 @@ class WidgetController extends Controller
             $this->post()
         );
 
-
-
         $message = '';
 
         if (!empty($this->post())) {
@@ -40,6 +38,7 @@ class WidgetController extends Controller
         $releases = $rm->readJsonFile();
 
         $this->render('date', [
+            'referer' => 'admin.php?page=k-module-widget-widget-date&name=',
             'message' => $message,
             'releases' => $releases,
             'type' => $rm::LN
@@ -78,6 +77,7 @@ class WidgetController extends Controller
         $releases = $rm->readJsonFile();
 
         $this->render('date', [
+            'referer' => 'admin.php?page=k-module-widget-widget-nodate&name=',
             'message' => $message,
             'releases' => $releases,
             'type' => $rm::NN

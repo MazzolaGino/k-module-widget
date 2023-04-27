@@ -15,7 +15,7 @@
             <td>{{ release['name'] }}</td>
             <td>{{ release['date'] }}</td>
             <td>{{ release['supports'] }}</td>
-            <td><a href="#" class="delete-release-link" data-name="{{ release['name'] }}">Supprimer</a></td>
+            <td><a href="javascript:void(0)" onclick="window.location.href = '{{ referer }}' + encodeURIComponent('{{ release['name'] }}')">Supprimer</a></td>
         </tr>
         {% endfor %}
     </tbody>
@@ -56,16 +56,3 @@
         <p class="submit"><input type="submit" name="add_release" id="submit" class="button button-primary" value="Ajouter"></p>
     </form>
 </div>
-<script>
-    // JS pour demander à l'utilisateur s'il est sûr de vouloir supprimer un jeu
-    const deleteLinks = document.querySelectorAll('.delete-release-link');
-    for (const link of deleteLinks) {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const name = event.target.dataset.name;
-            if (confirm('Êtes-vous sûr de vouloir supprimer le jeu "' + name + '" ?')) {
-                window.location.href = 'admin.php?page=k-module-widget-widget-date&name=' + encodeURIComponent(name);
-            }
-        });
-    }
-</script>
