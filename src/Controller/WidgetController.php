@@ -1,6 +1,7 @@
 <?php
 
 namespace KModuleWidget\Controller;
+
 use KModuleWidget\Lib\Release;
 
 
@@ -16,12 +17,12 @@ class WidgetController extends Controller
         $app = $this->getApp();
 
         $rm = new Release(
-            $app->getCnf(), 
-            $app->getPa(), 
+            $app->getCnf(),
+            $app->getPa(),
             $this->post()
         );
 
-        
+
 
         $message = '';
 
@@ -29,7 +30,6 @@ class WidgetController extends Controller
 
             $rm->addRelease($rm->getPostRelease());
             $message = 'Jeu ajouté avec succès.';
-            
         } elseif (!empty($this->get('name'))) {
 
             $name = urldecode($this->get('name'));
@@ -39,7 +39,11 @@ class WidgetController extends Controller
 
         $releases = $rm->readJsonFile();
 
-        $this->render('date', ['message' => $message, 'releases' => $releases]);
+        $this->render('date', [
+            'message' => $message,
+            'releases' => $releases,
+            'type' => $rm::LN
+        ]);
     }
 
     /**
@@ -52,9 +56,10 @@ class WidgetController extends Controller
         $app = $this->getApp();
 
         $rm = new Release(
-            $app->getCnf(), 
-            $app->getPa(), 
-            $this->post()
+            $app->getCnf(),
+            $app->getPa(),
+            $this->post(),
+            Release::NN
         );
 
         $message = '';
@@ -63,7 +68,6 @@ class WidgetController extends Controller
 
             $rm->addRelease($rm->getPostRelease());
             $message = 'Jeu ajouté avec succès.';
-            
         } elseif (!empty($this->get('name'))) {
 
             $name = urldecode($this->get('name'));
@@ -73,6 +77,10 @@ class WidgetController extends Controller
 
         $releases = $rm->readJsonFile();
 
-        $this->render('date', ['message' => $message, 'releases' => $releases]);
+        $this->render('date', [
+            'message' => $message,
+            'releases' => $releases,
+            'type' => $rm::NN
+        ]);
     }
 }
