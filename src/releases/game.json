@@ -140,6 +140,60 @@
     ],
     "list_no_date": [
         {
+            "name": "Valthirian Arc: Hero School Story 2",
+            "date": "2022",
+            "supports": "PS4|PS5|Xbox|Switch",
+            "url": "\/?s=Valthirian+Arc"
+        },
+        {
+            "name": "Banchou Tactics",
+            "date": "2023",
+            "supports": "PC",
+            "url": "\/?s=Banchou+Tactics"
+        },
+        {
+            "name": "The Legend of Nayuta: Boundless Trails",
+            "date": "2023",
+            "supports": "PC|PS4|PS5|Switch",
+            "url": "\/?s=Boundless+Trails"
+        },
+        {
+            "name": "CRYMACHINA",
+            "date": "2023",
+            "supports": "PS4|PS5|Switch",
+            "url": "\/?s=Crymachina"
+        },
+        {
+            "name": "Mary Skelter Finale",
+            "date": "2023",
+            "supports": "PC",
+            "url": "\/?s=Mary+Skelter+Finale"
+        },
+        {
+            "name": "Baten Kaitos I&II Remaster",
+            "date": "2023",
+            "supports": "Switch",
+            "url": "\/?s=Baten+Kaitos"
+        },
+        {
+            "name": "Touhou : New World",
+            "date": "2023",
+            "supports": "Switch|PC|PS4|PS5",
+            "url": "\/?s=Touhou"
+        },
+        {
+            "name": "Atelier Marie: The Alchemist of Salburg",
+            "date": "2023",
+            "supports": "Switch|PS4|PS5|PC",
+            "url": "\/?s=Atelier+Marie"
+        },
+        {
+            "name": "Monochrome Mobius",
+            "date": "2023",
+            "supports": "PS4|PS5",
+            "url": "\/?s=Monochrome+Mobius"
+        },
+        {
             "name": "Reverse Collapse : Code Name Bakery",
             "date": "2023",
             "supports": "Android|Apple IOS|PC|Switch",
@@ -150,12 +204,6 @@
             "date": "2023",
             "supports": "PS4|PS5|PC|Switch",
             "url": "\/?s=Megaton"
-        },
-        {
-            "name": "Valthirian Arc: Hero School Story 2",
-            "date": "2022",
-            "supports": "PS4|PS5|Xbox|Switch",
-            "url": "\/?s=Valthirian+Arc"
         },
         {
             "name": "Granblue Fantasy: Relink",
@@ -176,12 +224,6 @@
             "url": "\/?s=Fantasy+Life"
         },
         {
-            "name": "Banchou Tactics",
-            "date": "D\u00e9but 2023",
-            "supports": "PC",
-            "url": "\/?s=Banchou+Tactics"
-        },
-        {
             "name": "Eiyuden Chronicle: Hundred Heroes",
             "date": "2023",
             "supports": "PS5",
@@ -200,46 +242,10 @@
             "url": "\/?s=Trails+to+Azure"
         },
         {
-            "name": "The Legend of Nayuta: Boundless Trails",
-            "date": "Automne 2023",
-            "supports": "PC|PS4|PS5|Switch",
-            "url": "\/?s=Boundless+Trails"
-        },
-        {
-            "name": "CRYMACHINA",
-            "date": "Automne 2023",
-            "supports": "PS4|PS5|Switch",
-            "url": "\/?s=Crymachina"
-        },
-        {
-            "name": "Mary Skelter Finale",
-            "date": "Automne 2023",
-            "supports": "PC",
-            "url": "\/?s=Mary+Skelter+Finale"
-        },
-        {
             "name": "Eternights",
             "date": "2023",
             "supports": "PS4|PS5|PC",
             "url": "\/?s=Eternights"
-        },
-        {
-            "name": "Baten Kaitos I&II Remaster",
-            "date": "\u00c9t\u00e9 2023",
-            "supports": "Switch",
-            "url": "\/?s=Baten+Kaitos"
-        },
-        {
-            "name": "Touhou : New World",
-            "date": "\u00c9t\u00e9 2023",
-            "supports": "Switch|PC|PS4|PS5",
-            "url": "\/?s=Touhou"
-        },
-        {
-            "name": "Atelier Marie: The Alchemist of Salburg",
-            "date": "\u00c9t\u00e9 2023",
-            "supports": "Switch|PS4|PS5|PC",
-            "url": "\/?s=Atelier+Marie"
         },
         {
             "name": "Stellar Blade",
@@ -260,20 +266,14 @@
             "url": "\/?s=Miasma+Chronicles"
         },
         {
-            "name": "Monochrome Mobius",
-            "date": "Automne 2023",
-            "supports": "PS4|PS5",
-            "url": "\/?s=Monochrome+Mobius"
-        },
-        {
             "name": "The Legend of Contraria",
-            "date": "Premier trimestre 2024",
+            "date": "2024",
             "supports": "PC",
             "url": "\/?s=The+Legend+Of+Contraria"
         },
         {
             "name": "Earthlock 2",
-            "date": "Mars 2024",
+            "date": "2024",
             "supports": "PC|PS4|PS5|Xbox|Switch",
             "url": "\/?s=Earthlock+2"
         }

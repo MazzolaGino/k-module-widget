@@ -119,8 +119,43 @@ class Release
     public function addRelease(array $release): void
     {
         $json = $this->readJsonFile();
+
         $json[$this->type][] = $release;
+        $json[$this->type] = $this->sortReleases($json[$this->type]);
+        
+        
         file_put_contents($this->filename, json_encode($json, JSON_PRETTY_PRINT));
+    }
+
+    public function sortReleases(array $releases) 
+    {
+        if($this->type === self::LN) {
+
+            usort($releases, function($a, $b) {
+                return strtotime($a['date']) - strtotime($b['date']);
+            });
+
+        }else{
+            
+            usort($releases, function($a, $b) {
+                return strtotime($a['date'] . '-01-01') - strtotime($b['date'] . '-01-01');
+            });
+
+        }
+
+        return $releases;
+    }
+
+    private function after(&$tableau, $index, $nouvelleValeur) {
+        $tailleTableau = count($tableau);
+    
+        // Déplacer les éléments suivants d'une position vers la fin du tableau
+        for ($i = $tailleTableau - 1; $i >= $index; $i--) {
+            $tableau[$i + 1] = $tableau[$i];
+        }
+    
+        // Insérer le nouvel élément à l'index spécifié
+        $tableau[$index] = $nouvelleValeur;
     }
     
 }

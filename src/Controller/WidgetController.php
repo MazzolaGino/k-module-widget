@@ -67,6 +67,7 @@ class WidgetController extends Controller
 
             $rm->addRelease($rm->getPostRelease());
             $message = 'Jeu ajouté avec succès.';
+
         } elseif (!empty($this->get('name'))) {
 
             $name = urldecode($this->get('name'));

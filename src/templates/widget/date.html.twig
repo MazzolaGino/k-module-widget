@@ -32,10 +32,11 @@
                     <td><input name="name" type="text" id="name" required></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="date">Date de sortie</label></th>
                     {% if type == 'list_date' %}
+                        <th scope="row"><label for="date">Date de sortie</label></th>
                         <td><input name="date" type="date" id="date" required></td>
                     {% else %}
+                        <th scope="row"><label for="date">Année de sortie</label></th>
                         <td><input name="date" type="text" id="date" required></td>
                     {% endif %}
                 </tr>
