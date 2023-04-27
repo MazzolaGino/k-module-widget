@@ -1,0 +1,17 @@
+{
+    "name": "k-module-widget\/wordpress-plugin",
+    "license": "GNU",
+    "autoload": {
+        "psr-4": {
+            "KModuleWidget\\": "src\/"
+        }
+    },
+    "authors": [
+        {
+            "name": "klib user",
+            "email": "user@sample.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}

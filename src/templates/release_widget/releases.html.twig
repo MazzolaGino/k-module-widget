@@ -1,0 +1,57 @@
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<div id="custom_html-9999999998" class="widget_text widget widget_custom_html {{ prefix }}-block">
+    <h3 class="group"><span>Prochaines Sorties</span></h3>
+    <div class="textwidget custom-html-widget">
+        <ul class="{{ prefix }}-block">
+            {% for game in data[type] %}
+                {% if loop.index0 == 0 %}
+                    <div id="{{ prefix }}-page-{{ page }}" class="{{ prefix }}-page">
+                {% endif %}
+            {% if loop.index % 4 == 0 %}
+                {% set page = page + 1 %}
+                </div><div style="display:none;" class="{{ prefix }}-page" id="{{ prefix }}-page-{{ page }}">
+            {% endif %}
+
+            {% set supports = game['supports']|split('|') %}
+            {% set supportText = "" %}
+            {% for support in supports %}
+                {% if support == 'Xbox' %}
+                    {% set class = 'One' %}
+                {% else %}
+                    {% set class = support %}
+                {% endif %}
+                {% set supportText = supportText ~ '<a href="' ~ data['url'] ~ data['support_urls'][support] ~ '"><span style="font-size:12px;" class="' ~ class ~ '">' ~ support ~ '</span></a>' %}
+            {% endfor %}
+            
+            <li>
+                <p><span class="{{ prefix }}-date">{{ game['date'] }}</span> - <a href="{{ game['url'] }}">{{ game['name'] }}</a></p>
+                <p>{{ supportText | raw }}</p>
+            </li>
+            {% if loop.last %}
+                </div>
+            {% endif %}
+
+        {% endfor %}
+    </ul>
+    <ul class="pagination pagination-lg">
+        {% for i in range(0, page) %}
+            <li class="page-item"><a data-attr="{{ i }}" class="page-link {{ prefix }}-click {{ prefix }}-click-{{ i }}" href="javascript:void(0);">{{ i+1 }}</a></li>
+        {% endfor %}
+    </ul>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.{{ prefix }}-click-0').parent().addClass('disabled');
+            $('.{{ prefix }}-click').click(function() {
+                $('.{{ prefix }}-page').css("display", "none");
+                $('.{{ prefix }}-click').parent().removeClass('disabled');
+
+                var num = $(this).attr('data-attr');
+
+                $('.{{ prefix }}-click-' + num).parent().addClass('disabled');
+                $('#{{ prefix }}-page-' + num).fadeIn('slow');
+            });
+        });
+    </script>
+</div>
+
+</div>

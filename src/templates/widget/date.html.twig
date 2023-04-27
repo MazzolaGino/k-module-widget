@@ -1,0 +1,67 @@
+{% if releases %}
+<h2>Liste des sorties de jeu</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nom du jeu</th>
+            <th>Date de sortie</th>
+            <th>Supports</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for release in releases['list_date'] %}
+        <tr>
+            <td>{{ release['name'] }}</td>
+            <td>{{ release['date'] }}</td>
+            <td>{{ release['supports'] }}</td>
+            <td><a href="#" class="delete-release-link" data-name="{{ release['name'] }}">Supprimer</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+<div class="wrap">
+    <h1>Ajouter une sortie de jeu</h1>
+    <p class="message">{{ (message != '') ? message : '' }}</p>
+    <form method="post">
+        <table class="form-table">
+            <tbody>
+                <tr>
+                    <th scope="row"><label for="name">Nom du jeu</label></th>
+                    <td><input name="name" type="text" id="name" required></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="date">Date de sortie</label></th>
+                    <td><input name="date" type="date" id="date" required></td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="supports">Plateformes</label></th>
+                    <td>
+                        <label><input name="supports[]" type="checkbox" value="PC"> PC</label><br>
+                        <label><input name="supports[]" type="checkbox" value="IOS"> IOS</label><br>
+                        <label><input name="supports[]" type="checkbox" value="Android"> Android</label><br>
+                        <label><input name="supports[]" type="checkbox" value="PS4"> PS4</label><br>
+                        <label><input name="supports[]" type="checkbox" value="PS4"> PS5</label><br>
+                        <label><input name="supports[]" type="checkbox" value="Switch"> Switch</label><br>
+                        <label><input name="supports[]" type="checkbox" value="Xbox One">Xbox</label><br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p class="submit"><input type="submit" name="add_release" id="submit" class="button button-primary" value="Ajouter"></p>
+    </form>
+</div>
+<script>
+    // JS pour demander à l'utilisateur s'il est sûr de vouloir supprimer un jeu
+    const deleteLinks = document.querySelectorAll('.delete-release-link');
+    for (const link of deleteLinks) {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const name = event.target.dataset.name;
+            if (confirm('Êtes-vous sûr de vouloir supprimer le jeu "' + name + '" ?')) {
+                window.location.href = 'admin.php?page=k-module-widget-widget-date&name=' + encodeURIComponent(name);
+            }
+        });
+    }
+</script>

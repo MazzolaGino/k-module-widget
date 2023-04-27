@@ -1,0 +1,25 @@
+{
+    "plugin": "k-module-widget",
+    "scripts": [],
+    "classes": [
+        "..\/vendor\/autoload"
+    ],
+    "processor_namespace": "KModuleWidget\\Processor\\",
+    "processors": [
+        "WidgetProcessor"
+    ],
+    "controller_namespace": "KModuleWidget\\Controller\\",
+    "controllers": [
+        {
+            "name": "widget",
+            "class": "WidgetController",
+            "type": "admin",
+            "actions": {
+                "date": "Releases Configuration",
+                "nodate": "No Date Releases Configuration"
+
+            }
+        }
+    ],
+    "release_json": "releases/game.json"
+}
