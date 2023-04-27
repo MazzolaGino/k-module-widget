@@ -127,7 +127,7 @@ class Release
         file_put_contents($this->filename, json_encode($json, JSON_PRETTY_PRINT));
     }
 
-    public function sortReleases(array $releases) 
+    public function sortReleases(array $releases)
     {
         if($this->type === self::LN) {
 
