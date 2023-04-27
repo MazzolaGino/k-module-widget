@@ -17,6 +17,8 @@ class ReleaseWidget extends \WP_Widget
 
     private Environment $twig;
 
+    private string $title;
+
     public function __construct(
         Environment $twig,
         PathInterface $pa,
@@ -28,6 +30,7 @@ class ReleaseWidget extends \WP_Widget
         $this->pa = $pa;
         $this->type = $type;
         $this->twig = $twig;
+        $this->title = $title;
 
         parent::__construct($this->type, esc_html__($title, 'textdomain'), array(
             'description' => esc_html__('Affiche les prochaines sorties', 'textdomain'),
@@ -58,7 +61,8 @@ class ReleaseWidget extends \WP_Widget
             'j' => $j,
             'page' => $page,
             'type' => $this->type,
-            'prefix' => $prefix
+            'prefix' => $prefix,
+            'title' => $this->title
         ]);
     }
 }
