@@ -120,6 +120,8 @@ class Release
     {
         $json = $this->readJsonFile();
 
+        $release['url'] = "/?s=" . $this->transformTitle($release['name']);
+
         $json[$this->type][] = $release;
         $json[$this->type] = $this->sortReleases($json[$this->type]);
         
@@ -146,16 +148,24 @@ class Release
         return $releases;
     }
 
-    private function after(&$tableau, $index, $nouvelleValeur) {
-        $tailleTableau = count($tableau);
-    
-        // Déplacer les éléments suivants d'une position vers la fin du tableau
-        for ($i = $tailleTableau - 1; $i >= $index; $i--) {
-            $tableau[$i + 1] = $tableau[$i];
-        }
-    
-        // Insérer le nouvel élément à l'index spécifié
-        $tableau[$index] = $nouvelleValeur;
-    }
+    private function transformTitle($title) {
+        // Supprime les espaces à la fin et au début de la chaîne de caractères
+        $title = trim($title);
+     
+        // Convertit tous les caractères en minuscules
+        $title = strtolower($title);
+     
+        // Remplace tous les espaces et les caractères spéciaux par des plus (+)
+        $title = preg_replace('/[^a-zA-Z0-9]/','+',$title);
+     
+        // Supprime les plus en double
+        $title = preg_replace('/\++/','+',$title);
+     
+        // Supprime le dernier plus s'il existe
+        $title = rtrim($title,'+');
+     
+        return $title;
+     }
+     
     
 }
