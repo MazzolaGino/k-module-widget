@@ -1,6 +1,9 @@
 {
     "plugin": "k-module-widget",
     "scripts": [],
+    "assets": [
+        "hl.css"
+    ], 
     "classes": [
         "..\/vendor\/autoload"
     ],

@@ -80,11 +80,14 @@ class Release
      */
     public function readJsonFile(): array
     {
+
         if (!file_exists($this->filename)) {
-            throw new \Exception("Unable to retrieve game releases JSON file ($this->filename)");
+            throw new 
+            \Exception("Unable to retrieve game releases JSON file ($this->filename)");
         }
 
         $content = file_get_contents($this->filename);
+
         return json_decode($content, true);
     }
 

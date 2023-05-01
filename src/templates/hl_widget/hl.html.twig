@@ -1,0 +1,9 @@
+<div class="masgrid">
+	{% for post in data %}
+	<div onclick="location.href = '{{post['link']}}'" class="item" style="background-image: url({{post['img_link']}})">
+		<div class="hl-content">
+			<h2>{{post['title']}}</h2>
+		</div>
+	</div>
+	{% endfor %}
+</div>

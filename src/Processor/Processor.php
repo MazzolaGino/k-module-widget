@@ -6,21 +6,31 @@ use KLib\App;
 use KLib\AppBuilder;
 use KLib\Base\BaseProcessor;
 
-/**
- * Summary of Controller
- */
 class Processor extends BaseProcessor
 {
     /**
-     * Summary of getApp
+     *
      * @return App
      */
-    public function getApp(): App {
-        $dir = WP_PLUGIN_DIR . '/k-module-widget/src/';
-        $url = WP_PLUGIN_URL . '/k-module-widget/src/';
+    public function getApp(): App
+    {
+      
+        if(!($this->app)) {
 
-        return (new AppBuilder($dir, $url))->getApp();
+            $dir = WP_PLUGIN_DIR . '/k-module-widget/src/';
+            $url = WP_PLUGIN_URL . '/k-module-widget/src/';
+    
+            $this->app = (new AppBuilder($dir, $url))->getApp();
+
+        }
+
+        return $this->app;
     }
+
+    /**
+     *
+     * @return string
+     */
 
     public function getProcessorName(): string
     {

@@ -41,7 +41,7 @@ class WidgetController extends Controller
         $releases = $rm->readJsonFile();
 
         $this->render('date', [
-            'referer' => "admin.php?page=k-module-widget-widget-{$type}&name=",
+            'referer' => "admin.php?page=k-module-widget-widget-" . (($type === $rm::LN)? 'date' : 'nodate') . "&name=",
             'message' => $message,
             'releases' => $releases,
             'type' => $type
