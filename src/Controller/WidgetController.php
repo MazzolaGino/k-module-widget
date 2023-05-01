@@ -4,54 +4,19 @@ namespace KModuleWidget\Controller;
 
 use KModuleWidget\Lib\Release;
 
-
 class WidgetController extends Controller
 {
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
     public function date_action(): void
     {
-        $app = $this->getApp();
-
-        $rm = new Release(
-            $app->getCnf(),
-            $app->getPa(),
-            $this->post()
-        );
-
-        $message = '';
-
-        if (!empty($this->post())) {
-
-            $rm->addRelease($rm->getPostRelease());
-            $message = 'Jeu ajouté avec succès.';
-            
-        } elseif (!empty($this->get('name'))) {
-
-            $name = urldecode($this->get('name'));
-            $rm->removeReleaseByName($name);
-            $message = 'Jeu supprimé avec succès.';
-        }
-
-        $releases = $rm->readJsonFile();
-
-        $this->render('date', [
-            'referer' => 'admin.php?page=k-module-widget-widget-date&name=',
-            'message' => $message,
-            'releases' => $releases,
-            'type' => $rm::LN
-        ]);
+        $this->handleAction(Release::LN);
     }
 
-    /**
-     * Undocumented function
-     *
-     * @return void
-     */
     public function nodate_action(): void
+    {
+        $this->handleAction(Release::NN);
+    }
+
+    private function handleAction(string $type): void
     {
         $app = $this->getApp();
 
@@ -59,18 +24,15 @@ class WidgetController extends Controller
             $app->getCnf(),
             $app->getPa(),
             $this->post(),
-            Release::NN
+            $type
         );
 
         $message = '';
 
         if (!empty($this->post())) {
-
             $rm->addRelease($rm->getPostRelease());
             $message = 'Jeu ajouté avec succès.';
-
         } elseif (!empty($this->get('name'))) {
-
             $name = urldecode($this->get('name'));
             $rm->removeReleaseByName($name);
             $message = 'Jeu supprimé avec succès.';
@@ -79,10 +41,10 @@ class WidgetController extends Controller
         $releases = $rm->readJsonFile();
 
         $this->render('date', [
-            'referer' => 'admin.php?page=k-module-widget-widget-nodate&name=',
+            'referer' => "admin.php?page=k-module-widget-widget-{$type}&name=",
             'message' => $message,
             'releases' => $releases,
-            'type' => $rm::NN
+            'type' => $type
         ]);
     }
 }
