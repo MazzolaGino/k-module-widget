@@ -11,7 +11,8 @@ use Twig\Environment;
 class ReleaseWidget extends \WP_Widget
 {
 
-    private Release $rm;
+    private ReleaseRepository $rm;
+
     private PathInterface $pa;
     private string $type;
 
@@ -22,7 +23,7 @@ class ReleaseWidget extends \WP_Widget
     public function __construct(
         Environment $twig,
         PathInterface $pa,
-        Release $release,
+        ReleaseRepository $release,
         string $title = 'Prochaines Sorties',
         string $type = 'list_date'
     ) {
@@ -44,16 +45,31 @@ class ReleaseWidget extends \WP_Widget
      */
     public function widget($args, $instance)
     {
-        $data = $this->rm->readJsonFile();
-        $i = $j = $page = 0;
 
-        $tpl = $this->pa->fromTemplate('release_widget', 'releases');
+        $prefix = ($this->type === 'list_date') ? 'ln' : 'nn';
+        $siteUrl = get_site_url();
 
-        if ($this->type === 'list_date') {
-            $prefix = 'ln';
-        } else {
-            $prefix = 'nn';
+        $json = <<<EOF
+        {
+            "updated_at": "26-05-2022",
+            "url": "$siteUrl",
+            "support_urls": {
+                "PS4": "\/category\/ps4\/",
+                "PS5": "\/category\/ps5\/",
+                "Switch": "\/category\/switch\/",
+                "PC": "\/category\/pc\/",
+                "Xbox": "\/category\/xbox-series\/",
+                "Apple IOS": "\/category\/apple-ios\/",
+                "Android": "\/category\/android\/"
+            }
         }
+        EOF;
+
+        $data = json_decode($json, true, 512, JSON_THROW_ON_ERROR);
+
+        $data[$this->type] = $this->rm->listByReleaseDate($this->type);
+
+        $i = $j = $page = 0;
 
         echo $this->twig->render('release_widget/releases.html.twig', [
             'data' => $data,

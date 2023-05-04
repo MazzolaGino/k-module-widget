@@ -4,6 +4,7 @@ namespace KModuleWidget\Lib;
 
 use KLib\Implementation\ConfigurationInterface;
 use KLib\Implementation\PathInterface;
+use KModuleWidget\Lib\ReleaseRepository;
 
 class Release
 {
@@ -80,6 +81,8 @@ class Release
      */
     public function readJsonFile(): array
     {
+        
+        $repo = new ReleaseRepository();
 
         if (!file_exists($this->filename)) {
             throw new 
@@ -89,6 +92,28 @@ class Release
         $content = file_get_contents($this->filename);
 
         return json_decode($content, true);
+    }
+
+    public function migrate(): void 
+    {
+        $repo = new ReleaseRepository();
+       
+        $content = $this->readJsonFile();
+
+        foreach($content['list_date'] as $r)
+        {
+            $r['type'] = 'list_date';
+            $r['date'] = date('Y-m-d H:i:s', strtotime($r['date']));
+
+            $repo->create($r);
+        }
+
+        foreach($content['list_no_date'] as $r)
+        {
+            $r['type'] = 'list_no_date';
+            $r['date'] = $r['date'].'-01-01';
+            $repo->create($r);
+        }
     }
 
     /**
@@ -124,6 +149,8 @@ class Release
         $json = $this->readJsonFile();
 
         $release['url'] = "/?s=" . $this->transformTitle($release['name']);
+
+        $release['id'] = $this->encryptRelease($release);
 
         $json[$this->type][] = $release;
         $json[$this->type] = $this->sortReleases($json[$this->type]);
@@ -169,6 +196,25 @@ class Release
      
         return $title;
      }
+
+
+    // Méthode privée pour transformer un MD5 en tableau
+    private function encryptRelease($md5) {
+        // Décoder le MD5 en chaîne JSON
+        $json = base64_decode($md5);
+
+        // Convertir la chaîne JSON en tableau associatif
+        return json_decode($json, true);
+    }
+
+    
+    private function decryptRelease($array) {
+        // Convertir le tableau en chaîne JSON
+        $json = json_encode($array);
+    
+        // Calculer le MD5 de la chaîne JSON
+        return md5($json);
+      }
      
     
 }

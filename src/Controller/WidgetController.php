@@ -3,45 +3,56 @@
 namespace KModuleWidget\Controller;
 
 use KModuleWidget\Lib\Release;
+use KModuleWidget\Lib\ReleaseRepository;
 
 class WidgetController extends Controller
 {
     public function date_action(): void
-    {
+    {   
         $this->handleAction(Release::LN);
     }
 
     public function nodate_action(): void
-    {
+    {   
         $this->handleAction(Release::NN);
     }
 
     private function handleAction(string $type): void
     {
-        $app = $this->getApp();
 
-        $rm = new Release(
-            $app->getCnf(),
-            $app->getPa(),
-            $this->post(),
-            $type
-        );
+        $rm = new ReleaseRepository();
 
         $message = '';
 
         if (!empty($this->post())) {
-            $rm->addRelease($rm->getPostRelease());
-            $message = 'Jeu ajouté avec succès.';
-        } elseif (!empty($this->get('name'))) {
-            $name = urldecode($this->get('name'));
-            $rm->removeReleaseByName($name);
-            $message = 'Jeu supprimé avec succès.';
+
+            $rls = $this->post();
+
+            if(isset($rls['supports']) && is_array($rls['supports'])) {
+                $rls['supports'] = implode('|', $rls['supports']);
+            }else{
+                $rls['supports'] = '';
+            }
+
+            $rls['type'] = $type;
+
+            if (isset($rls['id'])) {
+                // modifier le jeu
+                $rm->update($rls['id'], $rls);
+                $message = 'Release mise à jour avec succès';
+            } else {
+                // ajouter le jeu
+                $rm->create($rls);
+                $message = 'Release ajoutée avec succès';
+            }
+
         }
 
-        $releases = $rm->readJsonFile();
+        $releases = $rm->listByReleaseDate($type);
 
         $this->render('date', [
-            'referer' => "admin.php?page=k-module-widget-widget-" . (($type === $rm::LN)? 'date' : 'nodate') . "&name=",
+            'ajax_url' => admin_url( 'admin-ajax.php' ),
+            'referer' => "admin.php?page=k-module-widget-widget-" . (($type === 'list_date') ? 'date' : 'nodate') . "&id=",
             'message' => $message,
             'releases' => $releases,
             'type' => $type

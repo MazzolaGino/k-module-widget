@@ -12,30 +12,6 @@
     },
     "list_date": [
         {
-            "name": "Mugen Souls",
-            "date": "27-04-2023",
-            "supports": "Switch",
-            "url": "\/?s=Mugen+Souls"
-        },
-        {
-            "name": "LIVE A LIVE",
-            "date": "27-04-2023",
-            "supports": "PS4|PS5|PC",
-            "url": "\/?s=Live+A+Live"
-        },
-        {
-            "name": "Shepherd Crossing",
-            "date": "27-04-2023",
-            "supports": "PC",
-            "url": "\/?s=Shepherd+Crossing"
-        },
-        {
-            "name": "qsdqsdqsd",
-            "date": "02-05-2023",
-            "supports": "PC|IOS|Android",
-            "url": "\/?s=qsdqsdqsd"
-        },
-        {
             "name": "Dokapon Kingdom : Connect",
             "date": "09-05-2023",
             "supports": "Switch",
@@ -54,6 +30,12 @@
             "url": "\/?s=Trinity+Trigger"
         },
         {
+            "name": "Pocket Mirror: GoldenerTraum",
+            "date": "19-05-2023",
+            "supports": "PC",
+            "url": "\/?s=pocket+mirror+goldenertraum"
+        },
+        {
             "name": "Fairy Fencer F : Refrain Chord",
             "date": "23-05-2023",
             "supports": "PC",
@@ -62,8 +44,14 @@
         {
             "name": "Miasma Chronicles",
             "date": "23-05-2023",
-            "supports": "PC|PS5|Xbox",
-            "url": "\/?s=Miasma+Chronicles"
+            "supports": "PS4|Xbox One",
+            "url": "\/?s=miasma+chronicles"
+        },
+        {
+            "name": "Cassette Beasts",
+            "date": "25-05-2023",
+            "supports": "Switch|Xbox One",
+            "url": "\/?s=cassette+beasts"
         },
         {
             "name": "Monster Menu : The Scavenger's Cookbook",
@@ -84,6 +72,12 @@
             "url": "\/?s=Caligula+Effect+Overdose"
         },
         {
+            "name": "Loop8: Summer of Gods",
+            "date": "06-06-2023",
+            "supports": "PC|PS4|Switch|Xbox One",
+            "url": "\/?s=loop8+summer+of+gods"
+        },
+        {
             "name": "FRONT MISSION 2",
             "date": "12-06-2023",
             "supports": "Switch",
@@ -96,10 +90,10 @@
             "url": "\/?s=Atelier"
         },
         {
-            "name": "Poket Mirror: GoldenerTraum",
-            "date": "19-06-2023",
-            "supports": "PC",
-            "url": "\/?s=poket+mirror+goldenertraum"
+            "name": "Valthirian Arc: Hero School Story 2",
+            "date": "22-06-2023",
+            "supports": "PS4|PS4|Switch",
+            "url": "\/?s=valthirian+arc+hero+school+story+2"
         },
         {
             "name": "Final Fantasy XVI",
@@ -120,6 +114,30 @@
             "url": "\/?s=Code+Rain"
         },
         {
+            "name": "The Legend of Heroes: Trails into Reverie",
+            "date": "07-07-2023",
+            "supports": "PS4|PS4|Switch",
+            "url": "\/?s=the+legend+of+heroes+trails+into+reverie"
+        },
+        {
+            "name": "Touhou: New World",
+            "date": "13-07-2023",
+            "supports": "Switch",
+            "url": "\/?s=touhou+new+world"
+        },
+        {
+            "name": "Atelier Marie: The Alchemist of Salburg",
+            "date": "13-07-2023",
+            "supports": "PC|PS4|PS4|Switch",
+            "url": "\/?s=atelier+marie+the+alchemist+of+salburg"
+        },
+        {
+            "name": "Touhou: New World",
+            "date": "14-07-2023",
+            "supports": "PC",
+            "url": "\/?s=touhou+new+world"
+        },
+        {
             "name": "Nobunaga Ambition : Awakening",
             "date": "20-07-2023",
             "supports": "Switch|PC|PS4",
@@ -132,10 +150,22 @@
             "url": "\/?s=Cross+Tails"
         },
         {
+            "name": "Armored Core VI: Fires of Rubicon",
+            "date": "25-08-2023",
+            "supports": "PC|PS4|PS4|Xbox One",
+            "url": "\/?s=armored+core+vi+fires+of+rubicon"
+        },
+        {
             "name": "Sea of Stars",
             "date": "29-08-2023",
             "supports": "PC|Switch|Xbox",
             "url": "\/?s=Sea+of+Stars"
+        },
+        {
+            "name": "Rhapsody: Marl Kingdom Chronicles",
+            "date": "01-09-2023",
+            "supports": "PS4|Switch",
+            "url": "\/?s=rhapsody+marl+kingdom+chronicles"
         },
         {
             "name": "Rune Factory 3 Special",
@@ -152,52 +182,34 @@
     ],
     "list_no_date": [
         {
-            "name": "Valthirian Arc: Hero School Story 2",
-            "date": "2022",
-            "supports": "PS4|PS5|Xbox|Switch",
-            "url": "\/?s=Valthirian+Arc"
-        },
-        {
             "name": "Banchou Tactics",
             "date": "2023",
             "supports": "PC",
-            "url": "\/?s=Banchou+Tactics"
+            "url": "\/?s=banchou+tactics"
         },
         {
             "name": "The Legend of Nayuta: Boundless Trails",
             "date": "2023",
-            "supports": "PC|PS4|PS5|Switch",
-            "url": "\/?s=Boundless+Trails"
+            "supports": "PC|PS4|Switch",
+            "url": "\/?s=the+legend+of+nayuta+boundless+trails"
         },
         {
             "name": "CRYMACHINA",
             "date": "2023",
-            "supports": "PS4|PS5|Switch",
-            "url": "\/?s=Crymachina"
+            "supports": "PC|PS4|PS4|Switch",
+            "url": "\/?s=crymachina"
         },
         {
             "name": "Mary Skelter Finale",
             "date": "2023",
             "supports": "PC",
-            "url": "\/?s=Mary+Skelter+Finale"
+            "url": "\/?s=mary+skelter+finale"
         },
         {
             "name": "Baten Kaitos I&II Remaster",
             "date": "2023",
             "supports": "Switch",
             "url": "\/?s=Baten+Kaitos"
-        },
-        {
-            "name": "Touhou : New World",
-            "date": "2023",
-            "supports": "Switch|PC|PS4|PS5",
-            "url": "\/?s=Touhou"
-        },
-        {
-            "name": "Atelier Marie: The Alchemist of Salburg",
-            "date": "2023",
-            "supports": "Switch|PS4|PS5|PC",
-            "url": "\/?s=Atelier+Marie"
         },
         {
             "name": "Monochrome Mobius",
@@ -242,12 +254,6 @@
             "url": "\/?s=Eiyuden+Chronicle"
         },
         {
-            "name": "The Legend of Heroes: Trails into Reverie",
-            "date": "2023",
-            "supports": "PC|PS4|PS5|Switch",
-            "url": "\/?s=Trails+into+Reverie"
-        },
-        {
             "name": "The Legend of Heroes: Trails to Azure",
             "date": "2023",
             "supports": "PC|PS4|PS5|Switch",
@@ -272,22 +278,106 @@
             "url": "\/?s=Suikoden+1"
         },
         {
-            "name": "Miasma Chronicles",
+            "name": "Touhou: New World",
             "date": "2023",
-            "supports": "PS5|PC|Xbox",
-            "url": "\/?s=Miasma+Chronicles"
+            "supports": "PS4|PS4",
+            "url": "\/?s=touhou+new+world"
         },
         {
-            "name": "The Legend of Contraria",
-            "date": "2024",
+            "name": "Mon-Yu ",
+            "date": "2023",
+            "supports": "PC|PS4|Switch",
+            "url": "\/?s=mon+yu"
+        },
+        {
+            "name": "Dungeon Travelers Series",
+            "date": "2023",
             "supports": "PC",
-            "url": "\/?s=The+Legend+Of+Contraria"
+            "url": "\/?s=dungeon+travelers+series"
+        },
+        {
+            "name": "The Caligula Effect 2",
+            "date": "2023",
+            "supports": "PS4",
+            "url": "\/?s=the+caligula+effect+2"
+        },
+        {
+            "name": "Great Ambition of the SLIMES",
+            "date": "2023",
+            "supports": "PC",
+            "url": "\/?s=great+ambition+of+the+slimes"
+        },
+        {
+            "name": "Xuan Yuan Sword: Mists Beyond the Mountains",
+            "date": "2023",
+            "supports": "PC|Switch",
+            "url": "\/?s=xuan+yuan+sword+mists+beyond+the+mountains"
+        },
+        {
+            "name": "Blue Protocol",
+            "date": "2023",
+            "supports": "PC|PS4|Xbox One",
+            "url": "\/?s=blue+protocol"
+        },
+        {
+            "name": "Infinity Strash: Dragon Quest The Adventure of Dai",
+            "date": "2023",
+            "supports": "PC|PS4|PS4|Switch",
+            "url": "\/?s=infinity+strash+dragon+quest+the+adventure+of+dai"
+        },
+        {
+            "name": "Lords of the Fallen",
+            "date": "2023",
+            "supports": "PC|PS4|Xbox One",
+            "url": "\/?s=lords+of+the+fallen"
+        },
+        {
+            "name": "Goblin Slayer Another Adventurer: Nightmare Feast",
+            "date": "2023",
+            "supports": "PC|Switch",
+            "url": "\/?s=goblin+slayer+another+adventurer+nightmare+feast"
+        },
+        {
+            "name": "SYNDUALITY: Echo of Ada",
+            "date": "2023",
+            "supports": "PC|PS4|Xbox One",
+            "url": "\/?s=synduality+echo+of+ada"
+        },
+        {
+            "name": "Wantless",
+            "date": "2023",
+            "supports": "PC",
+            "url": "\/?s=wantless"
+        },
+        {
+            "name": "Soulvars",
+            "date": "2023",
+            "supports": "PC|Xbox One",
+            "url": "\/?s=soulvars"
+        },
+        {
+            "name": "Inazuma Eleven: Victory Road of Heroes",
+            "date": "2023",
+            "supports": "IOS|Android|PS4|Switch",
+            "url": "\/?s=inazuma+eleven+victory+road+of+heroes"
         },
         {
             "name": "Earthlock 2",
             "date": "2024",
             "supports": "PC|PS4|PS5|Xbox|Switch",
             "url": "\/?s=Earthlock+2"
+        },
+        {
+            "name": "The Legend of Contraria",
+            "date": "2024",
+            "supports": "PC",
+            "url": "\/?s=the+legend+of+contraria"
+        },
+        {
+            "name": "Cassette Boy",
+            "date": "2024",
+            "supports": "PC|PS4|Switch",
+            "url": "\/?s=cassette+boy"
         }
     ]
 }

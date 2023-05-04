@@ -4,6 +4,7 @@ namespace KModuleWidget\Processor;
 
 use KModuleWidget\Lib\HlWidget;
 use KModuleWidget\Lib\Release;
+use KModuleWidget\Lib\ReleaseRepository;
 use KModuleWidget\Lib\ReleaseWidget;
 
 class WidgetProcessor extends Processor
@@ -50,12 +51,7 @@ class WidgetProcessor extends Processor
 
     private function register(string $title, string $type)
     {
-        $rm = new Release(
-            $this->getApp()->getCnf(),
-            $this->getApp()->getPa()
-        );
-
-        $widget = new ReleaseWidget($this->getApp()->twig(), $this->getApp()->getPa(), $rm, $title, $type);
+        $widget = new ReleaseWidget($this->getApp()->twig(), $this->getApp()->getPa(), new ReleaseRepository(), $title, $type);
 
         \register_widget($widget);
     }

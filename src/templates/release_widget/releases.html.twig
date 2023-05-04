@@ -28,7 +28,7 @@
             {% endfor %}
             
             <li>
-                <p><span class="{{ prefix }}-date">{{ game['date'] }}</span> - <a href="{{ game['url'] }}">{{ game['name'] }}</a></p>
+                <p><span class="{{ prefix }}-date">{{ (type=='list_date')? game['release_date']|date("d-m-Y") : game['release_date']|date("Y") }}</span> - <a href="{{ game['url'] }}">{{ game['name'] }}</a></p>
                 <p>{{ supportText | raw }}</p>
             </li>
             {% if loop.last %}

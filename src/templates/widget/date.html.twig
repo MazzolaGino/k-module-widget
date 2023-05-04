@@ -1,59 +1,166 @@
+
+
 {% if releases %}
-<h2>Liste des sorties de jeu</h2>
-<table>
-    <thead>
-        <tr>
-            <th>Nom du jeu</th>
-            <th>Date de sortie</th>
-            <th>Supports</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for release in releases[type] %}
-        <tr>
-            <td>{{ release['name'] }}</td>
-            <td>{{ release['date'] }}</td>
-            <td>{{ release['supports'] }}</td>
-            <td><a href="javascript:void(0)" onclick="window.location.href = '{{ referer }}' + encodeURIComponent('{{ release['name'] }}')">Supprimer</a></td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+	<div class="wrap release-editor">
+
+
+
+		<h1>Ajouter une sortie de jeu</h1>
+		{% if message != '' %}
+			<div id="setting-error-tgmpa" class="notice notice-success is-dismissible"> 
+				<p class="message">{{ message }}</p> 
+			</div>
+		{% endif %}
+
+		<br />
+		
+		<form id="release-form" method="post">
+
+			<label for="name">Nom du jeu <input name="name" type="text" id="name" required></label>
+
+			{% if type == 'list_date' %}
+					 <label for="date">Date de sortie <input type="date" name="date" id="date" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" required></label>
+			{% else %}
+					 <label for="date">Année de sortie <input name="date" type="text" id="date" required></label>
+			{% endif %}
+			<br /><br />
+			<div class="checkbox-group required">
+			 	<label for="supports">Plateformes 
+				<label><input name="supports[]" type="checkbox" value="PC">
+					PC</label>
+				<label><input name="supports[]" type="checkbox" value="IOS">
+					IOS</label>
+				<label><input name="supports[]" type="checkbox" value="Android">
+					Android</label>
+				<label><input name="supports[]" type="checkbox" value="PS4">
+					PS4</label>
+				<label><input name="supports[]" type="checkbox" value="PS5">
+					PS5</label>
+				<label><input name="supports[]" type="checkbox" value="Switch">
+					Switch</label>
+				<label><input name="supports[]" type="checkbox" value="Xbox One">Xbox</label><br /><br />
+			</label>
+			</div>
+
+			<label for="name">Lien du jeu <input name="url" type="text" id="url" required></label> <br /><br />
+			<input type="button" onclick="update_release_init()" name="reset" id="reset" class="button button-secondary" value="Reset">
+			 <input type="submit" name="add_release" id="submit" class="button button-primary" value="Ajouter">
+		</form>
+		<br /><br />
+	</div>
+	<table class="wp-list-table fixed striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nom du jeu</th>
+				<th>Date de sortie</th>
+				<th>Supports</th>
+				<th>Lien</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for release in releases %}
+				<tr id="id-{{ release['id'] }}">
+					<td>{{ release['id'] }}</td>
+					<td>{{ release['name'] }}</td>
+					<td>{{ release['release_date'] }}</td>
+					<td>{{ release['supports'] }}</td>
+					<td>{{ release['url'] }}</td>
+					<td>
+						<a href="javascript:void(0)" onclick="delete_release({{ release['id'] }})">Supprimer</a> |
+						<a href="javascript:void(0)" onclick="update_release(
+							'{{ release['id'] }}', 
+							'{{ release['name'] }}', 
+							'{{ release['release_date'] }}', 
+							'{{ release['supports'] }}', 
+							'{{ release['url'] }}' 
+						)">Modifier</a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endif %}
-<div class="wrap">
-    <h1>Ajouter une sortie de jeu</h1>
-    <p class="message">{{ (message != '') ? message : '' }}</p>
-    <form method="post">
-        <table class="form-table">
-            <tbody>
-                <tr>
-                    <th scope="row"><label for="name">Nom du jeu</label></th>
-                    <td><input name="name" type="text" id="name" required></td>
-                </tr>
-                <tr>
-                    {% if type == 'list_date' %}
-                        <th scope="row"><label for="date">Date de sortie</label></th>
-                        <td><input name="date" type="date" id="date" required></td>
-                    {% else %}
-                        <th scope="row"><label for="date">Année de sortie</label></th>
-                        <td><input name="date" type="text" id="date" required></td>
-                    {% endif %}
-                </tr>
-                <tr>
-                    <th scope="row"><label for="supports">Plateformes</label></th>
-                    <td>
-                        <label><input name="supports[]" type="checkbox" value="PC"> PC</label><br>
-                        <label><input name="supports[]" type="checkbox" value="IOS"> IOS</label><br>
-                        <label><input name="supports[]" type="checkbox" value="Android"> Android</label><br>
-                        <label><input name="supports[]" type="checkbox" value="PS4"> PS4</label><br>
-                        <label><input name="supports[]" type="checkbox" value="PS4"> PS5</label><br>
-                        <label><input name="supports[]" type="checkbox" value="Switch"> Switch</label><br>
-                        <label><input name="supports[]" type="checkbox" value="Xbox One">Xbox</label><br>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p class="submit"><input type="submit" name="add_release" id="submit" class="button button-primary" value="Ajouter"></p>
-    </form>
-</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+	function remove_release_message(element) {
+		element.remove();
+	}
+
+	function update_release_init() {
+        
+		$('#release-form').find('input#id').remove();
+		$('#release-form #name').val(null);
+		$('#release-form #date').val(null);
+		$('#release-form #url').val(null);
+
+		let checkboxes = document.getElementsByName("supports[]");
+
+		for (let i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].checked = false;
+        }
+	}
+
+	function update_release(id, name, date, supports, url) {
+        
+		update_release_init(id, name, date, supports, url);
+
+		let checkboxes = document.getElementsByName("supports[]");
+
+		$('#submit').val('Modifier');
+        $('#release-form').append('<input id="id" type="hidden" name="id" value="' + id + '" />');
+        $('#release-form #name').val(name);
+		$('#release-form #url').val(url);
+
+        let inputDate = date;
+        let parts = inputDate.split('-');
+        let year = parseInt(parts[0], 10);
+        let month = parseInt(parts[1], 10) - 1;
+        let day = parseInt(parts[2], 10);
+		let dateObject = new Date(year, month, day);
+
+        $('#release-form #date').val(dateObject.toLocaleDateString('fr-CA'));
+  
+        let supportsArray = supports.split("|");
+        
+        for (let i = 0; i < checkboxes.length; i++) {
+
+			let value = checkboxes[i].value;
+
+            if (supportsArray.includes(value)) {
+                checkboxes[i].checked = true;
+            }
+        }
+    }
+
+	function delete_release(id) 
+	{
+		$.ajax({
+
+         type : 'post',
+         dataType : 'json',
+         url : '{{ ajax_url }}',
+         data : {action: "delete_release", id: id},
+         success: function(response) {
+
+            if(response.message != '') {
+
+               $('#release-form').prepend(`
+				<div id="setting-error-tgmpa" class="notice notice-success is-dismissible"> 
+				<p class="message">${response.message}</p> 
+				<button onclick="remove_release_message($(this).parent('#setting-error-tgmpa'))" type="button" class="notice-dismiss"><span class="screen-reader-text">Ignorer cette notification.</span></button></div>
+				`);
+
+				$('tr#id-' + response.id).remove();
+
+            }
+
+         }
+      });
+
+	}
+</script>
