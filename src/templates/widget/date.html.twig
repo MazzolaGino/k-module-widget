@@ -1,6 +1,31 @@
-
-
 {% if releases %}
+<style>
+.hl-selected {
+	background-color: #fffee8 !important;
+} 
+
+.wp-list-table th.asc::after{
+	content : ' ↓';
+}
+.wp-list-table th.desc::after{
+	content : ' ↑';
+}
+
+.wp-list-table th{
+	cursor: pointer;
+	text-align: center;
+}
+.wp-list-table td{
+	text-align: center;
+}
+
+.recherche-label {
+	margin-bottom: 15px;
+	float: right;
+}
+
+
+</style>
 	<div class="wrap release-editor">
 
 
@@ -13,19 +38,17 @@
 		{% endif %}
 
 		<br />
+
+
 		
 		<form id="release-form" method="post">
 
 			<label for="name">Nom du jeu <input name="name" type="text" id="name" required></label>
-
-			{% if type == 'list_date' %}
-					 <label for="date">Date de sortie <input type="date" name="date" id="date" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" required></label>
-			{% else %}
-					 <label for="date">Année de sortie <input name="date" type="text" id="date" required></label>
-			{% endif %}
+			<br /><br />
+			<label for="date">Date de sortie <input type="date" name="date" id="date" placeholder="dd-mm-yyyy" value="" min="1997-01-01" max="2030-12-31" required></label>
 			<br /><br />
 			<div class="checkbox-group required">
-			 	<label for="supports">Plateformes 
+			 	<label id="supports" for="supports">Plateformes 
 				<label><input name="supports[]" type="checkbox" value="PC">
 					PC</label>
 				<label><input name="supports[]" type="checkbox" value="IOS">
@@ -42,52 +65,130 @@
 			</label>
 			</div>
 
-			<label for="name">Lien du jeu <input name="url" type="text" id="url" required></label> <br /><br />
+			<label for="url">Lien du jeu <input name="url" type="text" id="url" required></label> <br /><br />
 			<input type="button" onclick="update_release_init()" name="reset" id="reset" class="button button-secondary" value="Reset">
 			 <input type="submit" name="add_release" id="submit" class="button button-primary" value="Ajouter">
 		</form>
 		<br /><br />
-	</div>
-	<table class="wp-list-table fixed striped">
+        <label class="recherche-label"> Recherche <input type="text" class="recherche" placeholder="Recherche"></label>
+		<table style="width:100%" class="wp-list-table widefat fixed striped table-view-list">
 		<thead>
 			<tr>
-				<th>ID</th>
+				
 				<th>Nom du jeu</th>
 				<th>Date de sortie</th>
 				<th>Supports</th>
 				<th>Lien</th>
-				<th>Action</th>
+				<th>Actions</th>
+				
 			</tr>
 		</thead>
 		<tbody>
 			{% for release in releases %}
-				<tr id="id-{{ release['id'] }}">
-					<td>{{ release['id'] }}</td>
-					<td>{{ release['name'] }}</td>
+				<tr class="hl-selection" id="id-{{ release['id'] }}">
+				
+					<td><b>{{ release['name'] }}</b></td>
 					<td>{{ release['release_date'] }}</td>
 					<td>{{ release['supports'] }}</td>
 					<td>{{ release['url'] }}</td>
 					<td>
 						<a href="javascript:void(0)" onclick="update_release(
+						    $('#id-{{ release['id'] }}'),
 							'{{ release['id'] }}', 
 							'{{ release['name'] }}', 
 							'{{ release['release_date'] }}', 
 							'{{ release['supports'] }}', 
 							'{{ release['url'] }}' 
-						)">Modifier</a> |
+						)"><span class="dashicons dashicons-edit"></span></a> |
 
-						<a style="color:red;" href="javascript:void(0)" onclick="delete_release({{ release['id'] }})">Supprimer</a> 
+						<a style="color:red;" href="javascript:void(0)" onclick="delete_release({{ release['id'] }})"><span class="dashicons dashicons-trash"></span></a> 
 
 					</td>
+					
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
+	</div>
+	
+
 {% endif %}
+
+
 
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 <script type="text/javascript">
+
+	$(document).ready(function() {
+  // Lorsque le document est prêt, on récupère le tbody et les lignes du tableau
+  var tbody = $('tbody');
+  var rows = tbody.find('tr');
+
+  // On définit la fonction qui permet de comparer deux lignes en fonction de la valeur de la colonne spécifiée
+  function compareRows(a, b, colIndex, ascending) {
+    var valA = $(a).find('td').eq(colIndex).text().toUpperCase();
+    var valB = $(b).find('td').eq(colIndex).text().toUpperCase();
+    return ascending ? (valA < valB ? -1 : valA > valB ? 1 : 0) : (valA > valB ? -1 : valA < valB ? 1 : 0);
+  }
+
+  // On attache un événement au clic sur les titres de colonne pour lancer le tri
+  $('th').click(function() {
+    var colIndex = $(this).index();
+    // On récupère la classe 'sorted' de la colonne triée (si elle existe)
+    var sortedClass = $(this).hasClass('sorted') ? 'sorted' : '';
+    // On supprime la classe 'sorted' de toutes les colonnes
+    $('th').removeClass('sorted');
+    // On ajoute la classe 'sorted' à la colonne triée
+    $(this).addClass('sorted');
+    // On récupère l'ordre de tri actuel (si la colonne était déjà triée)
+    var ascending = (sortedClass === 'sorted') ? $(this).hasClass('asc') : true;
+    // On inverse l'ordre de tri si la colonne était déjà triée
+    ascending = !ascending;
+    // On supprime les classes 'asc' et 'desc' de toutes les colonnes
+    $('th').removeClass('asc desc');
+    // On ajoute la classe 'asc' ou 'desc' à la colonne triée en fonction de l'ordre de tri
+    $(this).addClass(ascending ? 'asc' : 'desc');
+    // On trie les lignes
+    rows.sort(function(a, b) {
+      return compareRows(a, b, colIndex, ascending);
+    });
+    // On vide le tbody et on y insère les lignes triées
+    tbody.empty();
+    rows.each(function() {
+      tbody.append(this);
+    });
+  });
+
+
+  // On ajoute un champ de recherche au-dessus du tableau
+  var searchInput = $('.recherche');
+
+  // On ajoute l'événement keyup sur le champ de recherche
+  searchInput.on('keyup', function() {
+    var searchTerm = $(this).val().toUpperCase();
+
+    // On parcourt chaque ligne du tableau
+    rows.each(function() {
+      var row = $(this);
+      var match = false;
+
+      // On parcourt chaque colonne de la ligne
+      row.find('td').each(function() {
+        var cellText = $(this).text().toUpperCase();
+
+        // Si le texte de la cellule contient la chaîne de recherche, on indique qu'il y a une correspondance et on arrête la boucle
+        if (cellText.indexOf(searchTerm) > -1) {
+          match = true;
+          return false;
+        }
+      });
+
+      // Si la ligne correspond à la recherche, on l'affiche, sinon on la cache
+      row.toggle(match);
+    });
+  });
+});
 
 	function remove_release_message(element) {
 		element.remove();
@@ -105,11 +206,21 @@
 		for (let i = 0; i < checkboxes.length; i++) {
             checkboxes[i].checked = false;
         }
+
+		$('#submit').val('Ajouter');
+
+		$('.hl-selection').removeClass('hl-selected');
 	}
 
-	function update_release(id, name, date, supports, url) {
+	function update_release(element, id, name, date, supports, url) {
+
+
         
 		update_release_init(id, name, date, supports, url);
+
+	
+
+		element.addClass('hl-selected');
 
 		let checkboxes = document.getElementsByName("supports[]");
 
@@ -137,6 +248,8 @@
                 checkboxes[i].checked = true;
             }
         }
+
+		$('html, body').animate({scrollTop:0}, 'slow');
     }
 
 	function delete_release(id) 
@@ -158,9 +271,7 @@
 				`);
 
 				$('tr#id-' + response.id).remove();
-
             }
-
          }
       });
 
