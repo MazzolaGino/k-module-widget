@@ -68,14 +68,16 @@
 					<td>{{ release['supports'] }}</td>
 					<td>{{ release['url'] }}</td>
 					<td>
-						<a href="javascript:void(0)" onclick="delete_release({{ release['id'] }})">Supprimer</a> |
 						<a href="javascript:void(0)" onclick="update_release(
 							'{{ release['id'] }}', 
 							'{{ release['name'] }}', 
 							'{{ release['release_date'] }}', 
 							'{{ release['supports'] }}', 
 							'{{ release['url'] }}' 
-						)">Modifier</a>
+						)">Modifier</a> |
+
+						<a style="color:red;" href="javascript:void(0)" onclick="delete_release({{ release['id'] }})">Supprimer</a> 
+
 					</td>
 				</tr>
 			{% endfor %}
