@@ -8,11 +8,9 @@ class ReleaseRepository
 
     public function __construct()
     {
-        global $wpdb;
-
         $this->table_name = 'releases';
     }
-    
+
     // Create
     public function create($data)
     {
@@ -39,7 +37,7 @@ class ReleaseRepository
 
         $result = $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT * FROM $this->table_name WHERE id = %d",
+                "SELECT * FROM $this->table_name WHERE id = %d AND soft_delete <> 1",
                 $id
             ),
             ARRAY_A
@@ -71,8 +69,11 @@ class ReleaseRepository
     {
         global $wpdb;
 
-        $wpdb->delete(
+        $wpdb->update(
             $this->table_name,
+            array(
+                'soft_delete' => 1
+            ),
             array('id' => $id)
         );
     }
@@ -84,7 +85,7 @@ class ReleaseRepository
 
         $result = $wpdb->get_row(
             $wpdb->prepare(
-                "SELECT * FROM $this->table_name WHERE name = %s",
+                "SELECT * FROM $this->table_name WHERE name = %s AND soft_delete <> 1",
                 $name
             ),
             ARRAY_A
@@ -99,7 +100,10 @@ class ReleaseRepository
         global $wpdb;
 
         $result = $wpdb->get_results(
-            "SELECT * FROM $this->table_name WHERE `type` like '$type' ORDER BY release_date",
+            "
+            SELECT * FROM $this->table_name 
+            WHERE `type` like '$type' AND soft_delete <> 1 
+            ORDER BY release_date",
             ARRAY_A
         );
 

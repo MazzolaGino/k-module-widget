@@ -1,0 +1,1 @@
+ALTER TABLE `releases` ADD `soft_delete` INT(1) NOT NULL DEFAULT 0 AFTER `url`;
