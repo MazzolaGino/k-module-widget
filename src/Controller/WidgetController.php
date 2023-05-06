@@ -16,7 +16,9 @@ class WidgetController extends Controller
     {   
         $this->handleAction(Release::NN);
     }
-
+    /**
+     *
+     */
     private function handleAction(string $type): void
     {
 
